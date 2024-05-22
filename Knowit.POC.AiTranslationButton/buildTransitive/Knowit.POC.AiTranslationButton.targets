@@ -1,0 +1,21 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <KnowitAiTranslationButtonContentFilesPath>$(MSBuildThisFileDirectory)..\App_Plugins\Knowit.POC.AiTranslationButton\**\*.*</KnowitAiTranslationButtonContentFilesPath>
+  </PropertyGroup>
+
+  <Target Name="CopyKnowitAiTranslationButtonAssets" BeforeTargets="BeforeBuild">
+    <ItemGroup>
+      <KnowitAiTranslationButtonContentFiles Include="$(KnowitAiTranslationButtonContentFilesPath)" />
+    </ItemGroup>
+    <Message Text="Copying Knowit.POC.AiTranslationButton files: $(KnowitAiTranslationButtonContentFilesPath) - #@(KnowitAiTranslationButtonContentFiles->Count()) files" Importance="high" />
+    <Copy SourceFiles="@(KnowitAiTranslationButtonContentFiles)" DestinationFiles="@(KnowitAiTranslationButtonContentFiles->'$(MSBuildProjectDirectory)\App_Plugins\Knowit.POC.AiTranslationButton\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+  </Target>
+
+  <Target Name="ClearKnowitAiTranslationButtonAssets" BeforeTargets="Clean">
+    <ItemGroup>
+      <KnowitAiTranslationButtonDir Include="$(MSBuildProjectDirectory)\App_Plugins\Knowit.POC.AiTranslationButton\" />
+    </ItemGroup>
+    <Message Text="Clear old Knowit.POC.AiTranslationButton data" Importance="high" />
+    <RemoveDir Directories="@(KnowitAiTranslationButtonDir)" />
+  </Target>
+</Project>

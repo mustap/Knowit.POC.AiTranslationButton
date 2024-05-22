@@ -1,0 +1,31 @@
+{
+  "$schema": "../../umbraco-package-schema.json",
+  "name": "AiTranslationButton",
+  "version": "0.1.0",
+  "weight": 10,
+  "extensions": [
+    {
+      "type": "workspaceAction",
+      "kind": "default",
+      "alias": "Knowit.POC.AiTranslationButton.Extension",
+      "name": "AI Button",
+      "api": "/App_Plugins/Knowit.POC.AiTranslationButton/dist/knowit-poc.aitranslationbutton.js",
+      "forEntityTypes": [],
+      "meta": {
+        "label": "Translate to other cultures",
+        "look": "secondary",
+        "color": "positive",
+        "icon": "icon-wand"
+      },
+      "conditions": [
+        {
+          "alias": "Umb.Condition.WorkspaceAlias",
+          "match": "Umb.Workspace.Document"
+        },
+        {
+          "alias": "Umb.Condition.EntityIsNotTrashed"
+        }
+      ]
+    }
+  ]
+}

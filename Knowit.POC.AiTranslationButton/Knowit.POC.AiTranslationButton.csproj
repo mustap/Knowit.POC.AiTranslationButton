@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <ContentTargetFolders>.</ContentTargetFolders>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageId>Knowit.POC.AiTranslationButton</PackageId>
+        <Product>Knowit.POC.AiTranslationButton</Product>
+        <Title>Knowit.POC.AiTranslationButton</Title>
+        <PackageTags>umbraco plugin package</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="OpenAI" Version="1.11.0" />
+        <PackageReference Include="Umbraco.Cms.Web.Website" Version="14.0.0-rc2"/>
+        <PackageReference Include="Umbraco.Cms.Web.Common" Version="14.0.0-rc3" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="App_Plugins\Knowit.POC.AiTranslationButton\dist\**" ExcludeFromSingleFile="true" CopyToPublishDirectory="Always"/>
+        <Content Include="App_Plugins\Knowit.POC.AiTranslationButton\umbraco-package.json" ExcludeFromSingleFile="true" CopyToPublishDirectory="Always"/>
+        <None Include="buildTransitive\**" Pack="true" PackagePath="buildTransitive"/>
+        <None Include="README.md">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+    
+    <Target Name="NpmBuild" BeforeTargets="BeforeBuild">
+        <Exec Command="npm i --prefix App_Plugins/Knowit.POC.AiTranslationButton ; npm --prefix App_Plugins/Knowit.POC.AiTranslationButton run build"/>
+    </Target>
+
+</Project>
